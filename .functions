@@ -1,0 +1,42 @@
+#Значение la, при котором цифры станут красными
+let CRIT_LOAD=2
+
+function load_average {
+# Load average
+set -- `cat /proc/loadavg`
+
+five=$1
+let int_five=`echo $five | cut -d '.' -f1`
+
+ten=$2
+let int_ten=`echo $ten | cut -d '.' -f1`
+
+fifteen=$3
+let int_fifteen=`echo $fifteen | cut -d '.' -f1`
+
+#FIVE
+if [ $int_five -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;31m"
+fi
+echo -n " $five"
+if [ $int_five -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;33m"
+fi
+#TEN
+if [ $int_ten -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;31m"
+fi
+echo -n " $ten"
+if [ $int_ten -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;33m"
+fi
+echo -ne "\e[0;33m"
+#FIFTEEN
+if [ $int_fifteen -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;31m"
+fi
+echo -n " $fifteen "
+if [ $int_fifteen -gt $CRIT_LOAD ]; then
+echo -ne "\e[0;33m"
+fi
+}
